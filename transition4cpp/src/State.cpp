@@ -5,18 +5,18 @@
 #include "State.h"
 
 State::
-State(Machine machine) {
-    this->machine = machine;
+State(const string name) {
+    this->name = name;
 }
 
 void State::
-addEnterCallback(enterFunc *enter) {
-
+addEnterCallback(const enterFunc enter) {
+    this->enterFunList.push_back(enter);
 }
 
 void State::
-addExitCallback(exitFunc *exit) {
-
+addExitCallback(const exitFunc exit) {
+    this->exitFunList.push_back(exit);
 }
 
 void State::
@@ -24,4 +24,7 @@ onEnter() {
 
 }
 
-void State::onExit() {}
+void State::
+onExit() {
+
+}

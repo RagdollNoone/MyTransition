@@ -8,4 +8,10 @@ add_executable(transition4cpp src/main.cpp
         src/State.h
         src/Object.h
         src/Machine.cpp
-        src/Machine.h)
+        src/Machine.h
+        src/Transition.cpp
+        src/Transition.h
+        src/EventData.cpp
+        src/EventData.h
+        src/Condition.cpp
+        src/Condition.h)

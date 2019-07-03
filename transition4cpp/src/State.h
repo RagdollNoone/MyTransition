@@ -6,27 +6,34 @@
 #define TRANSITION4CPP_STATE_H
 
 #include <stdlib.h>
+#include <vector>
+#include <string>
 #include "Object.h"
 #include "Machine.h"
+#include "EventData.h"
+
+using namespace std;
 
 class State : public Object{
 public:
-    typedef void *(enterFunc)(void);
-    typedef void *(exitFunc)(void);
+    // TODO：check const位置和修饰含义的关系
+    typedef void (*enterFunc)(const EventData *);
+    typedef void (*exitFunc)(const EventData *);
 
 public:
-    State(Machine machine);
-    void addEnterCallback(enterFunc *enter);
-    void addExitCallback(exitFunc *exit);
+    State(const string);
+    void addEnterCallback(const enterFunc);
+    void addExitCallback(const exitFunc);
+
+    // TODO：remove 操作有必要实现吗?
 
 private:
     void onEnter();
     void onExit();
 
 private:
-    Machine machine;
-    enterFunc enter;
-    exitFunc exit;
-
+    string name;
+    vector<enterFunc> enterFunList;
+    vector<exitFunc> exitFunList;
 };
 #endif //TRANSITION4CPP_STATE_H
