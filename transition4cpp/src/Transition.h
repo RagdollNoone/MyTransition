@@ -19,9 +19,9 @@ public:
 public:
     Transition(const string, State*, State*);
     bool execute(EventData &); // TODO：是设计成指针更好还是引用更好
-    void addBeforeCallback(const beforeFunc *);
-    void addAfterCallback(const afterFunc *);
-    void addPrepareCallback(const prepareFunc *);
+    void addBeforeCallback(const beforeFunc);
+    void addAfterCallback(const afterFunc);
+    void addPrepareCallback(const prepareFunc);
 
 private:
     void changeState(EventData &);

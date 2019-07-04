@@ -6,8 +6,18 @@
 #define TRANSITION4CPP_CONDITION_H
 
 #include "Object.h"
+#include "EventData.h"
 
 class Condition : public Object {
+public:
+    typedef bool (*checkFunc)(EventData *);
+
+public:
+    Condition(checkFunc);
+    bool check();
+
+private:
+    checkFunc callback;
 
 };
 #endif //TRANSITION4CPP_CONDITION_H

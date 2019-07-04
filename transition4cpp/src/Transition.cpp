@@ -11,3 +11,29 @@ Transition(const string name, State *source,  State *dest) {
     this->source = source;
     this->dest = dest;
 }
+
+bool Transition::
+execute(EventData &) {
+
+}
+
+void Transition::
+addBeforeCallback(const beforeFunc callback) {
+    beforeFuncList.push_back(callback);
+}
+
+void Transition::
+addAfterCallback(const afterFunc callback) {
+    afterFuncList.push_back(callback);
+}
+
+void Transition::
+addPrepareCallback(const prepareFunc callback) {
+    prepareFuncList.push_back(callback);
+}
+
+
+void Transition::
+changeState(EventData &) {
+
+}

@@ -3,3 +3,13 @@
 //
 
 #include "Condition.h"
+
+Condition::
+Condition(checkFunc callback) {
+    this->callback = callback;
+}
+
+bool Condition::
+check() {
+    return true;
+}
