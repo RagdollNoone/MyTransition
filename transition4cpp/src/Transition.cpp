@@ -18,18 +18,23 @@ execute(EventData &) {
 }
 
 void Transition::
-addBeforeCallback(const beforeFunc callback) {
+addBeforeCallback(const callbackFunc callback) {
     beforeFuncList.push_back(callback);
 }
 
 void Transition::
-addAfterCallback(const afterFunc callback) {
+addAfterCallback(const callbackFunc callback) {
     afterFuncList.push_back(callback);
 }
 
 void Transition::
-addPrepareCallback(const prepareFunc callback) {
+addPrepareCallback(const callbackFunc callback) {
     prepareFuncList.push_back(callback);
+}
+
+string Transition::
+getName() {
+    return name;
 }
 
 

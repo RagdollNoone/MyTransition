@@ -12,16 +12,15 @@
 
 class Transition : public Object {
 public:
-    typedef void (*beforeFunc)(const EventData *);
-    typedef void (*afterFunc)(const EventData *);
-    typedef void (*prepareFunc)(const EventData *);
+    typedef void (*callbackFunc)(const EventData *);
 
 public:
     Transition(const string, State*, State*);
     bool execute(EventData &); // TODO：是设计成指针更好还是引用更好
-    void addBeforeCallback(const beforeFunc);
-    void addAfterCallback(const afterFunc);
-    void addPrepareCallback(const prepareFunc);
+    void addBeforeCallback(const callbackFunc);
+    void addAfterCallback(const callbackFunc);
+    void addPrepareCallback(const callbackFunc);
+    string getName();
 
 private:
     void changeState(EventData &);
@@ -31,8 +30,8 @@ private:
     State *source;
     State *dest;
     vector<Condition> conditionList;
-    vector<beforeFunc> beforeFuncList;
-    vector<afterFunc> afterFuncList;
-    vector<prepareFunc> prepareFuncList;
+    vector<callbackFunc> beforeFuncList;
+    vector<callbackFunc> afterFuncList;
+    vector<callbackFunc> prepareFuncList;
 };
 #endif //TRANSITION4CPP_TRANSITION_H

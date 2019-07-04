@@ -14,4 +14,8 @@ add_executable(transition4cpp src/main.cpp
         src/EventData.cpp
         src/EventData.h
         src/Condition.cpp
-        src/Condition.h)
+        src/Condition.h
+        src/Event.cpp
+        src/Event.h
+        src/Model.cpp
+        src/Model.h)

@@ -10,13 +10,18 @@ State(const string name) {
 }
 
 void State::
-addEnterCallback(const enterFunc enter) {
+addEnterCallback(const callbackFunc enter) {
     this->enterFunList.push_back(enter);
 }
 
 void State::
-addExitCallback(const exitFunc exit) {
+addExitCallback(const callbackFunc exit) {
     this->exitFunList.push_back(exit);
+}
+
+string State::
+getName() {
+    return name;
 }
 
 void State::

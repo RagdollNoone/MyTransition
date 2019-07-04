@@ -17,14 +17,13 @@ using namespace std;
 class State : public Object{
 public:
     // TODO：check const位置和修饰含义的关系
-    typedef void (*enterFunc)(const EventData *);
-    typedef void (*exitFunc)(const EventData *);
+    typedef void (*callbackFunc)(const EventData *);
 
 public:
     State(const string);
-    void addEnterCallback(const enterFunc);
-    void addExitCallback(const exitFunc);
-
+    void addEnterCallback(const callbackFunc);
+    void addExitCallback(const callbackFunc);
+    string getName();
     // TODO：remove 操作有必要实现吗?
 
 private:
@@ -33,7 +32,7 @@ private:
 
 private:
     string name;
-    vector<enterFunc> enterFunList;
-    vector<exitFunc> exitFunList;
+    vector<callbackFunc> enterFunList;
+    vector<callbackFunc> exitFunList;
 };
 #endif //TRANSITION4CPP_STATE_H
