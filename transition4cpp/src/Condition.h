@@ -6,7 +6,8 @@
 #define TRANSITION4CPP_CONDITION_H
 
 #include "Object.h"
-#include "EventData.h"
+
+class EventData;
 
 class Condition : public Object {
 public:
@@ -18,6 +19,7 @@ public:
 
 private:
     checkFunc callback;
+
 
 };
 #endif //TRANSITION4CPP_CONDITION_H

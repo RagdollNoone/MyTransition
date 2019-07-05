@@ -5,10 +5,16 @@
 #ifndef TRANSITION4CPP_TRANSITION_H
 #define TRANSITION4CPP_TRANSITION_H
 
+#include <string>
+#include <vector>
 
 #include "Object.h"
-#include "State.h"
-#include "Condition.h"
+
+class State;
+class Condition;
+class EventData;
+
+using namespace std;
 
 class Transition : public Object {
 public:

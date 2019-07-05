@@ -6,10 +6,15 @@
 #define TRANSITION4CPP_EVENTDATA_H
 
 #include "Object.h"
-#include "State.h"
-#include "Model.h"
-#include "Machine.h"
-#include "Event.h"
+
+#include <string>
+
+class Machine;
+class Model;
+class Event;
+class State;
+
+using namespace std;
 
 class EventData : public Object {
 public:

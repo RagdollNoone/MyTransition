@@ -4,7 +4,6 @@
 
 #include "Transition.h"
 
-
 Transition::
 Transition(const string name, State *source,  State *dest) {
     this->name = name;

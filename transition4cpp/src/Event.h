@@ -5,14 +5,16 @@
 #ifndef TRANSITION4CPP_EVENT_H
 #define TRANSITION4CPP_EVENT_H
 
-#include <string>
 #include "Object.h"
-#include "Transition.h"
-#include "Machine.h"
-#include "Model.h"
+
+#include <string>
+#include <vector>
+
+class Transition;
+class Machine;
+class Model;
 
 using namespace std;
-
 
 class Event : public Object {
 public:

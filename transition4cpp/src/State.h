@@ -5,12 +5,11 @@
 #ifndef TRANSITION4CPP_STATE_H
 #define TRANSITION4CPP_STATE_H
 
-#include <stdlib.h>
-#include <vector>
-#include <string>
 #include "Object.h"
-#include "Machine.h"
-#include "EventData.h"
+#include <string>
+#include <vector>
+
+class EventData;
 
 using namespace std;
 
