@@ -35,7 +35,7 @@ private:
     string name;
     State *source;
     State *dest;
-    vector<Condition> conditionList;
+    vector<Condition *> conditionList;
     vector<callbackFunc> beforeFuncList;
     vector<callbackFunc> afterFuncList;
     vector<callbackFunc> prepareFuncList;

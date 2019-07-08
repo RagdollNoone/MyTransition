@@ -6,11 +6,11 @@
 #define TRANSITION4CPP_EVENT_H
 
 #include "Object.h"
+#include "Transition.h"
 
 #include <string>
 #include <vector>
 
-class Transition;
 class Machine;
 class Model;
 

@@ -34,7 +34,7 @@ public:
 private:
     Machine *machine;
     State *currentState;
-    vector<string[3]> eventList;
+    vector<vector<string>> eventList;
     vector<string> stateList;
 
     string destName;

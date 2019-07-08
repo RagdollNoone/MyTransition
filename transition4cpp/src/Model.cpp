@@ -3,9 +3,13 @@
 //
 
 #include "Model.h"
+#include "State.h"
+#include "Machine.h"
 
 Model::
 Model() {
+    this->machine = NULL;
+    this->currentState = NULL;
     this->destName = string();
 }
 
@@ -34,7 +38,7 @@ trigger(string triggerName) {
     if (NULL != machine) {
         string stateName = getCurrentStateName();
 
-        vector<string[3]>::iterator it = eventList.begin();
+        vector<vector<string>>::iterator it = eventList.begin();
         for (; it != eventList.end(); ++it) {
             if (stateName == (*it)[0] && triggerName == (*it)[1]) {
                 destName = (*it)[2];
