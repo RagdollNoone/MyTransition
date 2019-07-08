@@ -18,7 +18,7 @@ addTransition(Transition *transition) {
 
 bool Event::
 trigger() {
-
+    return true;
 }
 
 void Event::
@@ -46,10 +46,10 @@ getName() {
 
 bool Event::
 _trigger() {
-
+    return true;
 }
 
 bool Event::
 process(EventData *) {
-
+    return true;
 }

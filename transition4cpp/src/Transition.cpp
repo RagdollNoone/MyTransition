@@ -13,7 +13,7 @@ Transition(const string name, State *source,  State *dest) {
 
 bool Transition::
 execute(EventData &) {
-
+    return true;
 }
 
 void Transition::
