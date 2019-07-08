@@ -9,4 +9,5 @@ add_executable(transition4cpp src/Machine.cpp
         src/Model.cpp
         src/Transition.cpp
         src/State.cpp
+        src/Condition.cpp
         src/main.cpp)

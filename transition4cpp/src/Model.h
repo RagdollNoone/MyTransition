@@ -1,7 +1,6 @@
 //
 // Created by dendy on 19-7-4.
 //
-
 #ifndef TRANSITION4CPP_MODEL_H
 #define TRANSITION4CPP_MODEL_H
 
@@ -10,6 +9,9 @@
 #include <string>
 
 #include "Object.h"
+
+#include "State.h"
+#include "Machine.h"
 
 class State;
 class Machine;

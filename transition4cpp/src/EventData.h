@@ -1,6 +1,7 @@
 //
 // Created by dendy on 19-7-3.
 //
+#pragma once
 
 #ifndef TRANSITION4CPP_EVENTDATA_H
 #define TRANSITION4CPP_EVENTDATA_H

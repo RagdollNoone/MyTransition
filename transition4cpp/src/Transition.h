@@ -1,7 +1,6 @@
 //
 // Created by dendy on 19-7-3.
 //
-
 #ifndef TRANSITION4CPP_TRANSITION_H
 #define TRANSITION4CPP_TRANSITION_H
 
@@ -18,11 +17,11 @@ using namespace std;
 
 class Transition : public Object {
 public:
-    typedef void (*callbackFunc)(const EventData *);
+    typedef void (*callbackFunc)(EventData *);
 
 public:
     Transition(const string, State*, State*);
-    bool execute(EventData &); // TODO：是设计成指针更好还是引用更好
+    bool execute(EventData &);
     void addBeforeCallback(const callbackFunc);
     void addAfterCallback(const callbackFunc);
     void addPrepareCallback(const callbackFunc);

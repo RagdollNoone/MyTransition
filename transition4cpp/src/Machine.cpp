@@ -97,7 +97,13 @@ getEvent(string name) {
     return ret;
 }
 
+void Machine::
+trigger(Model *, string, string, string) {
+
+}
+
+
 bool Machine::
 setState(Model *, string) {
-
+    return true;
 }

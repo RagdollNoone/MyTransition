@@ -3,8 +3,6 @@
 //
 
 #include "Model.h"
-#include "State.h"
-#include "Machine.h"
 
 Model::
 Model() {
@@ -45,10 +43,10 @@ trigger(string triggerName) {
             }
         }
 
-        if (destName.empty()) {
+        if (!destName.empty()) {
             machine->trigger(this, stateName, triggerName, destName);
         } else {
-            // TODO: 输出出错日志
+
         }
     }
 }

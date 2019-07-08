@@ -1,7 +1,6 @@
 //
 // Created by dendy on 19-7-2.
 //
-
 #ifndef TRANSITION4CPP_MACHINE_H
 #define TRANSITION4CPP_MACHINE_H
 
@@ -9,14 +8,18 @@
 #include <vector>
 #include <stdlib.h>
 
+#include "Object.h"
 #include "State.h"
 #include "Transition.h"
-#include "Condition.h"
-#include "Model.h"
 #include "Event.h"
-#include "EventData.cpp"
+
+class Model;
+class State;
+class Event;
 
 using namespace std;
+
+//class Transition;
 
 class Machine : public Object {
 public:

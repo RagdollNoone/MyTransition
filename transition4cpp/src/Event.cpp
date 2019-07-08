@@ -3,8 +3,6 @@
 //
 
 #include "Event.h"
-#include "Model.h"
-#include "State.h"
 
 Event::
 Event(string name, Machine *machine, Model *model) {
