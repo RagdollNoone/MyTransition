@@ -25,15 +25,16 @@ class Machine : public Object {
 public:
     Machine();
     Machine(Model *);
-    Machine(Model *, vector<string> *, vector<string[3]> *, string);
+    Machine(Model *, vector<string> *, vector<vector<string>> *, string);
 
     void addModel(Model *);
+    void initModel(Model *);
 
     void addState(string);
-    void addStates(vector<string>*);
+    void addStates(vector<string> *);
 
-    void addTransition(string[3]);
-    void addTransitions(vector<string[3]> *);
+    void addTransition(vector<string>);
+    void addTransitions(vector<vector<string>> *);
 
     void trigger(Model *, string, string, string);
 
@@ -43,6 +44,8 @@ public:
     bool setState(Model *, string);
 
 private:
+    void _addModel(Model *);
+    void _addEvent(Event *);
     Event* getEvent(string name);
     State* getState(string name);
 

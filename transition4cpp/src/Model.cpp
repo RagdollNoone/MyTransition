@@ -5,10 +5,8 @@
 #include "Model.h"
 
 Model::
-Model() {
-    this->machine = NULL;
-    this->currentState = NULL;
-    this->destName = string();
+Model(string modelName) {
+    this->destName = modelName;
 }
 
 void Model::
@@ -29,6 +27,32 @@ getCurrentStateName() {
 void Model::
 setMachine(Machine *machine) {
     this->machine = machine;
+}
+
+void Model::
+setEventList(vector<vector<string>> *eventList) {
+    vector<vector<string>>::iterator it = eventList->begin();
+    for (; it != eventList->end(); ++it) {
+        this->eventList.push_back(*it);
+    }
+}
+
+void Model::
+setStateList(vector<string> *stateList) {
+    vector<string>::iterator it = stateList->begin();
+    for (; it != stateList->end(); ++it) {
+        this->stateList.push_back(*it);
+    }
+}
+
+void Model::
+addEvent(vector<string> *event) {
+    this->eventList.push_back(*event);
+}
+
+void Model::
+addState(string state) {
+    this->stateList.push_back(state);
 }
 
 void Model::

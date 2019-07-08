@@ -15,17 +15,27 @@ Machine(Model *model) {
 }
 
 Machine::
-Machine(Model *model, vector<string> *states, vector<string[3]> *transitions, string initStateName) {
-    this->addModel(model);
+Machine(Model *model, vector<string> *states, vector<vector<string>> *transitions, string initStateName) {
+    this->initStateName = initStateName;
     this->addStates(states);
     this->addTransitions(transitions);
-
-    this->initStateName = initStateName;
+    this->_addModel(model);
 }
 
 void Machine::
 addModel(Model *model) {
+    this->initModel(model);
+    this->_addModel(model);
+}
+
+void Machine::
+initModel(Model *model, ) {
     setState(model, initStateName);
+    model->setMachine(this);
+}
+
+void Machine::
+_addModel(Model *model) {
     modelList.push_back(model);
 }
 
@@ -45,8 +55,8 @@ addState(string stateName) {
 }
 
 void Machine::
-addTransitions(vector<string[3]> *transitions) {
-    vector<string[3]>::iterator it = (*transitions).begin();
+addTransitions(vector<vector<string>> *transitions) {
+    vector<vector<string>>::iterator it = (*transitions).begin();
 
     for (; it != transitions->end(); ++it) {
         addTransition(*it);
@@ -54,7 +64,7 @@ addTransitions(vector<string[3]> *transitions) {
 }
 
 void Machine::
-addTransition(string transition[3]) {
+addTransition(vector<string> transition) {
     State *src = getState(transition[0]);
     State *dest = getState(transition[2]);
 
@@ -63,10 +73,20 @@ addTransition(string transition[3]) {
         return;
     }
 
-//    Transition *newTransition = new Transition(transition[1], src, dest);
+    Transition *newTransition = new Transition(transition[1], src, dest);
 
+    Event *event = getEvent(dest->getName());
+    if (NULL == event) {
+        event = new Event(dest->getName(), this);
+        this->_addEvent(event);
+    }
 
+    event->addTransition(newTransition);
+}
 
+void Machine::
+_addEvent(Event *event) {
+    this->eventList.push_back(event);
 }
 
 State* Machine::
@@ -104,6 +124,10 @@ trigger(Model *, string, string, string) {
 
 
 bool Machine::
-setState(Model *, string) {
+setState(Model *model, string initState) {
+    State *state = getState(initState);
+    if (NULL == state) return false;
+
+    model->setCurrentState(state);
     return true;
 }

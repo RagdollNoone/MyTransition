@@ -20,10 +20,9 @@ using namespace std;
 
 class Event : public Object {
 public:
-    Event(string, Machine *, Model *);
+    Event(string, Machine *);
     void addTransition(Transition *);
     bool trigger();
-    void addCallback(string, Transition::callbackFunc callback);
     string getName();
 
 private:
@@ -32,7 +31,6 @@ private:
 
 private:
     Machine *machine;
-    Model *model;
     string name;
     vector<Transition *> transitionList;
 };

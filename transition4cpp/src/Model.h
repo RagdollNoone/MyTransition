@@ -20,7 +20,7 @@ using namespace std;
 
 class Model : public Object {
 public:
-    Model();
+    Model(string);
 
     void setCurrentState(State *);
     State* getCurrentState();
@@ -30,8 +30,11 @@ public:
 
     void trigger(string);
 
-    void setEventList();
-    void setStateList();
+    void setEventList(vector<vector<string>> *);
+    void setStateList(vector<string> *);
+
+    void addEvent(vector<string> *);
+    void addState(string);
 
 private:
     Machine *machine;
