@@ -14,12 +14,12 @@ using namespace std;
 
 class State : public Object{
 public:
-    typedef void (*callbackFunc)(const EventData *);
+    typedef void (*callbackFunc)(EventData *);
 
 public:
-    State(const string);
-    void addEnterCallback(const callbackFunc);
-    void addExitCallback(const callbackFunc);
+    State(string);
+    void addEnterCallback(callbackFunc);
+    void addExitCallback(callbackFunc);
     string getName();
 
 private:

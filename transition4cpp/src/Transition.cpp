@@ -42,8 +42,14 @@ getSrcName() {
 }
 
 void Transition::
-changeDestState(State *destState) {
-    dest = destState;
+changeStatesOfTransititon(State *srcState, State *destState) {
+    if (NULL != srcState) {
+        source = srcState;
+    }
+
+    if (NULL != destState) {
+        dest = destState;
+    }
 }
 
 void Transition::

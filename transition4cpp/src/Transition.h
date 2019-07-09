@@ -28,7 +28,7 @@ public:
     void addPrepareCallback(const callbackFunc);
     string getTriggerName();
     string getSrcName();
-    void changeDestState(State *);
+    void changeStatesOfTransititon(State *, State *);
 
 private:
     void changeState(EventData &);

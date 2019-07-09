@@ -78,7 +78,7 @@ addTransitions(vector<vector<string>> *transitions) {
 }
 
 Transition* Machine::
-findTransition(vector<string> *transition) {
+findTransition(string transition) {
     vector<Event *>::iterator it = eventList.begin();
 
     for (; it != eventList.end(); ++it) {
@@ -106,9 +106,9 @@ addTransition(vector<string> *transition) {
         this->_addEvent(event);
     }
 
-    Transition *temp = findTransition(transition);
+    Transition *temp = findTransition((*transition)[1]);
     if (NULL != temp) {
-        temp->changeDestState(dest);
+        temp->changeStatesOfTransititon(src, dest);
     } else {
         Transition *newTransition = new Transition((*transition)[1], src, dest);
         event->addTransition(newTransition);
@@ -161,4 +161,28 @@ setState(Model *model, string initState) {
 
     model->setCurrentState(state);
     return true;
+}
+
+void Machine::
+addStateCallback(string stateName, string callbackName, State::callbackFunc callback) {
+    if (callbackName == "enter") {
+        getState(stateName)->addEnterCallback(callback);
+    } else if (callbackName == "exit") {
+        getState(stateName)->addExitCallback(callback);
+    } else {
+
+    }
+}
+
+void Machine::
+addTransitionCallback(string transitionName, string callbackName, Transition::callbackFunc callback) {
+    if (callbackName == "before") {
+        findTransition(transitionName)->addBeforeCallback(callback);
+    } else if (callbackName == "prepare") {
+        findTransition(transitionName)->addPrepareCallback(callback);
+    } else if (callbackName == "after") {
+        findTransition(transitionName)->addAfterCallback(callback);
+    } else {
+
+    }
 }

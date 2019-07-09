@@ -14,6 +14,13 @@ int main() {
 
     Machine *machine = new Machine(lump, &states, &transitions, "solid");
 
+    machine->addStateCallback("solid", "enter", &(Matter::enter));
+    machine->addStateCallback("solid", "exit", &(Matter::exit));
+
+    machine->addTransitionCallback("melt", "before", &Matter::before);
+    machine->addTransitionCallback("melt", "prepare", &Matter::prepare);
+    machine->addTransitionCallback("melt", "after", &Matter::after);
+
     cout << "just for break" << endl;
 
     return 0;

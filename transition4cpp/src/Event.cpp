@@ -11,16 +11,20 @@ Event(string name, Machine *machine) {
 }
 
 Transition* Event::
-findTransition(vector<string> *transition){
+findTransition(string transition){
     vector<Transition *>::iterator it = transitionList.begin();
     for (; it != transitionList.end(); ++it) {
-        if ((*it)->getSrcName() == (*transition)[0] &&
-            (*it)->getTriggerName() == (*transition)[1]) {
+        if ((*it)->getTriggerName() == transition) {
             return (*it);
         }
     }
 
     return NULL;
+}
+
+void Event::
+addTransition(Transition *transition) {
+    this->transitionList.push_back(transition);
 }
 
 bool Event::

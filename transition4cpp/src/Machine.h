@@ -34,7 +34,7 @@ public:
     void addState(string);
     void addStates(vector<string> *);
 
-    Transition* findTransition(vector<string> *);
+    Transition* findTransition(string);
     void addTransition(vector<string> *);
     void addTransitions(vector<vector<string>> *);
 

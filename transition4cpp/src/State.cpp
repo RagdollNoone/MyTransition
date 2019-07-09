@@ -5,17 +5,17 @@
 #include "State.h"
 
 State::
-State(const string name) {
+State(string name) {
     this->name = name;
 }
 
 void State::
-addEnterCallback(const callbackFunc enter) {
+addEnterCallback(callbackFunc enter) {
     this->enterFunList.push_back(enter);
 }
 
 void State::
-addExitCallback(const callbackFunc exit) {
+addExitCallback(callbackFunc exit) {
     this->exitFunList.push_back(exit);
 }
 
