@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "Object.h"
+#include "State.h"
 
 class State;
 class Condition;
@@ -25,7 +26,9 @@ public:
     void addBeforeCallback(const callbackFunc);
     void addAfterCallback(const callbackFunc);
     void addPrepareCallback(const callbackFunc);
-    string getName();
+    string getTriggerName();
+    string getSrcName();
+    void changeDestState(State *);
 
 private:
     void changeState(EventData &);

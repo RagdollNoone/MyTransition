@@ -32,10 +32,19 @@ addPrepareCallback(const callbackFunc callback) {
 }
 
 string Transition::
-getName() {
+getTriggerName() {
     return name;
 }
 
+string Transition::
+getSrcName() {
+    return source->getName();
+}
+
+void Transition::
+changeDestState(State *destState) {
+    dest = destState;
+}
 
 void Transition::
 changeState(EventData &) {

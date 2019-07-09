@@ -21,6 +21,7 @@ using namespace std;
 class Event : public Object {
 public:
     Event(string, Machine *);
+    Transition* findTransition(vector<string> *);
     void addTransition(Transition *);
     bool trigger();
     string getName();

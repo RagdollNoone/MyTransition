@@ -30,13 +30,15 @@ public:
     void addModel(Model *);
     void initModel(Model *);
 
+    bool isStateExit(string);
     void addState(string);
     void addStates(vector<string> *);
 
-    void addTransition(vector<string>);
+    Transition* findTransition(vector<string> *);
+    void addTransition(vector<string> *);
     void addTransitions(vector<vector<string>> *);
 
-    void trigger(Model *, string, string, string);
+    void trigger(Model *, string, string);
 
     void addStateCallback(string, string, State::callbackFunc);
     void addTransitionCallback(string, string, Transition::callbackFunc);

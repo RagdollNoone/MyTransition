@@ -19,7 +19,7 @@ Machine(Model *model, vector<string> *states, vector<vector<string>> *transition
     this->initStateName = initStateName;
     this->addStates(states);
     this->addTransitions(transitions);
-    this->_addModel(model);
+    this->addModel(model);
 }
 
 void Machine::
@@ -29,7 +29,7 @@ addModel(Model *model) {
 }
 
 void Machine::
-initModel(Model *model, ) {
+initModel(Model *model) {
     setState(model, initStateName);
     model->setMachine(this);
 }
@@ -48,8 +48,22 @@ addStates(vector<string> *states) {
     }
 }
 
+bool Machine::
+isStateExit(string name) {
+    vector<State *>::iterator it = stateList.begin();
+    for (; it != stateList.end(); ++it) {
+        if ((*it)->getName() == name) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void Machine::
 addState(string stateName) {
+    if (isStateExit(stateName)) return;
+
     State *newState = new State(stateName);
     stateList.push_back(newState);
 }
@@ -59,29 +73,46 @@ addTransitions(vector<vector<string>> *transitions) {
     vector<vector<string>>::iterator it = (*transitions).begin();
 
     for (; it != transitions->end(); ++it) {
-        addTransition(*it);
+        addTransition(&(*it));
     }
 }
 
+Transition* Machine::
+findTransition(vector<string> *transition) {
+    vector<Event *>::iterator it = eventList.begin();
+
+    for (; it != eventList.end(); ++it) {
+        Transition *ret = (*it)->findTransition(transition);
+        if(NULL != ret)
+            return ret;
+    }
+
+    return NULL;
+}
+
 void Machine::
-addTransition(vector<string> transition) {
-    State *src = getState(transition[0]);
-    State *dest = getState(transition[2]);
+addTransition(vector<string> *transition) {
+    State *src = getState((*transition)[0]);
+    State *dest = getState((*transition)[2]);
 
     if (NULL == src || NULL == dest) {
         // TODO: error process
         return;
     }
 
-    Transition *newTransition = new Transition(transition[1], src, dest);
-
-    Event *event = getEvent(dest->getName());
+    Event *event = getEvent(src->getName());
     if (NULL == event) {
-        event = new Event(dest->getName(), this);
+        event = new Event(src->getName(), this);
         this->_addEvent(event);
     }
 
-    event->addTransition(newTransition);
+    Transition *temp = findTransition(transition);
+    if (NULL != temp) {
+        temp->changeDestState(dest);
+    } else {
+        Transition *newTransition = new Transition((*transition)[1], src, dest);
+        event->addTransition(newTransition);
+    }
 }
 
 void Machine::
@@ -118,7 +149,7 @@ getEvent(string name) {
 }
 
 void Machine::
-trigger(Model *, string, string, string) {
+trigger(Model *model, string srcName, string destName) {
 
 }
 

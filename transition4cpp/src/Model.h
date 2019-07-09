@@ -30,18 +30,9 @@ public:
 
     void trigger(string);
 
-    void setEventList(vector<vector<string>> *);
-    void setStateList(vector<string> *);
-
-    void addEvent(vector<string> *);
-    void addState(string);
-
 private:
     Machine *machine;
     State *currentState;
-    vector<vector<string>> eventList;
-    vector<string> stateList;
-
-    string destName;
+    string modelName;
 };
 #endif //TRANSITION4CPP_MODEL_H

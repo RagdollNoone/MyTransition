@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Matter.h"
 
-
 int main() {
     Model *lump = new Matter("lump");
 
