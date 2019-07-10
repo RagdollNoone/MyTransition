@@ -16,12 +16,12 @@ class Matter : public Model {
 public:
     Matter(string modelName) : Model(modelName) {};
 
-    void enter(EventData *);
-    void exit(EventData *);
+    static void enter(EventData *);
+    static void exit(EventData *);
 
-    void before(EventData *);
-    void after(EventData *);
-    void prepare(EventData *);
+    static void before(EventData *);
+    static void after(EventData *);
+    static void prepare(EventData *);
 };
 
 #endif //TRANSITION4CPP_MATTER_H

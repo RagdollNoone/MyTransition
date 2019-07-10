@@ -10,16 +10,17 @@ Event(string name, Machine *machine) {
     this->machine = machine;
 }
 
-Transition* Event::
-findTransition(string transition){
+bool Event::
+findTransition(string transitionName, Transition *&transition){
     vector<Transition *>::iterator it = transitionList.begin();
     for (; it != transitionList.end(); ++it) {
-        if ((*it)->getTriggerName() == transition) {
-            return (*it);
+        if ((*it)->getTriggerName() == transitionName) {
+            transition = (*it);
+            return true;
         }
     }
 
-    return NULL;
+    return false;
 }
 
 void Event::
@@ -27,22 +28,8 @@ addTransition(Transition *transition) {
     this->transitionList.push_back(transition);
 }
 
-bool Event::
-trigger() {
-    return true;
-}
-
 string Event::
 getName() {
-    return name;
+    return this->name;
 }
 
-bool Event::
-_trigger() {
-    return true;
-}
-
-bool Event::
-process(EventData *) {
-    return true;
-}

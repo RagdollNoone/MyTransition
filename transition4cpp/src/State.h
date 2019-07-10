@@ -8,27 +8,31 @@
 #include <string>
 #include <vector>
 
+#include "EventData.h"
+#include "Callback.h"
+
 class EventData;
 
 using namespace std;
 
-class State : public Object{
-public:
-    typedef void (*callbackFunc)(EventData *);
+namespace StateMachine {
+    class State : public Object {
 
-public:
-    State(string);
-    void addEnterCallback(callbackFunc);
-    void addExitCallback(callbackFunc);
-    string getName();
+    public:
+        State(string);
 
-private:
-    void onEnter();
-    void onExit();
+        void fillCallback(int, EventData *);
 
-private:
-    string name;
-    vector<callbackFunc> enterFunList;
-    vector<callbackFunc> exitFunList;
-};
+        void addEnterCallback(callbackFunc);
+
+        void addExitCallback(callbackFunc);
+
+        string getName();
+
+    private:
+        string name;
+        vector<callbackFunc> enterFunList;
+        vector<callbackFunc> exitFunList;
+    };
+}
 #endif //TRANSITION4CPP_STATE_H

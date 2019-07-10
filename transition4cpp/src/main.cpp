@@ -1,5 +1,8 @@
 #include <iostream>
 #include "Matter.h"
+#include "Machine.h"
+
+using namespace StateMachine;
 
 int main() {
     Model *lump = new Matter("lump");
@@ -17,11 +20,17 @@ int main() {
     machine->addStateCallback("solid", "enter", &(Matter::enter));
     machine->addStateCallback("solid", "exit", &(Matter::exit));
 
-    machine->addTransitionCallback("melt", "before", &Matter::before);
-    machine->addTransitionCallback("melt", "prepare", &Matter::prepare);
-    machine->addTransitionCallback("melt", "after", &Matter::after);
+    machine->addTransitionCallback("melt", "before", &(Matter::before));
+    machine->addTransitionCallback("melt", "prepare", &(Matter::prepare));
+    machine->addTransitionCallback("melt", "after", &(Matter::after));
 
     cout << "just for break" << endl;
+
+    lump->trigger("melt");
+
+    cout << "--------------------------" << endl;
+
+    lump->trigger("sublimate");
 
     return 0;
 }

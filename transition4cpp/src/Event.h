@@ -18,21 +18,21 @@ class Transition;
 
 using namespace std;
 
-class Event : public Object {
-public:
-    Event(string, Machine *);
-    Transition* findTransition(string);
-    void addTransition(Transition *);
-    bool trigger();
-    string getName();
+namespace StateMachine {
+    class Event : public Object {
+    public:
+        Event(string, Machine *);
 
-private:
-    bool _trigger();
-    bool process(EventData *);
+        bool findTransition(string, Transition *&);
 
-private:
-    Machine *machine;
-    string name;
-    vector<Transition *> transitionList;
-};
+        void addTransition(Transition *);
+
+        string getName();
+
+    private:
+        Machine *machine;
+        string name;
+        vector<Transition *> transitionList;
+    };
+}
 #endif //TRANSITION4CPP_EVENT_H

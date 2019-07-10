@@ -31,9 +31,9 @@ setMachine(Machine *machine) {
 
 void Model::
 trigger(string triggerName) {
-//    if (NULL != machine) {
-//        string stateName = getCurrentStateName();
-//
-//        this->machine->trigger(this, stateName, triggerName);
-//    }
+    if (NULL != machine) {
+        string stateName = getCurrentStateName();
+
+        this->machine->trigger(this, stateName, triggerName);
+    }
 }

@@ -10,8 +10,14 @@ State(string name) {
 }
 
 void State::
-addEnterCallback(callbackFunc enter) {
-    this->enterFunList.push_back(enter);
+fillCallback(int type, EventData *eventData){
+    if (type == 0) {
+        eventData->setEnter(&(this->enterFunList));
+    } else if (type == 1) {
+        eventData->setExit(&(this->exitFunList));
+    } else {
+
+    }
 }
 
 void State::
@@ -21,15 +27,5 @@ addExitCallback(callbackFunc exit) {
 
 string State::
 getName() {
-    return name;
-}
-
-void State::
-onEnter() {
-
-}
-
-void State::
-onExit() {
-
+    return this->name;
 }

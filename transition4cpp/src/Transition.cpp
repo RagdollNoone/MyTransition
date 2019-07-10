@@ -7,18 +7,15 @@
 Transition::
 Transition(const string name, State *source,  State *dest) {
     this->name = name;
-    this->source = source;
-    this->dest = dest;
+    this->src = source;
+    this->dst = dest;
 }
 
-bool Transition::
-execute(EventData &) {
-    return true;
-}
-
-void Transition::
-addBeforeCallback(const callbackFunc callback) {
-    beforeFuncList.push_back(callback);
+void Transition::fillCallback(EventData *eventData){
+    eventData->setPrepare(&(this->prepareFuncList))
+    eventData->setCondition(&(this->conditionList))
+    eventData->setBefore(&(this->beforeFuncList))
+    eventData->setAfter(&(this->afterFuncList))
 }
 
 void Transition::
@@ -38,21 +35,31 @@ getTriggerName() {
 
 string Transition::
 getSrcName() {
-    return source->getName();
+    return src->getName();
+}
+
+string Transition::
+getDstName() {
+    return dst->getName();
+}
+
+State* Transition::
+getSrcState() {
+    return src;
+}
+
+State* Transition::
+getDstState() {
+    return dst;
 }
 
 void Transition::
-changeStatesOfTransititon(State *srcState, State *destState) {
+changeTransititon(State *srcState, State *destState) {
     if (NULL != srcState) {
-        source = srcState;
+        src = srcState;
     }
 
     if (NULL != destState) {
-        dest = destState;
+        dst = destState;
     }
-}
-
-void Transition::
-changeState(EventData &) {
-
 }

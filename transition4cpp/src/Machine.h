@@ -11,6 +11,7 @@
 #include "Object.h"
 #include "State.h"
 #include "Transition.h"
+#include "EventData.h"
 #include "Event.h"
 
 class Model;
@@ -20,43 +21,67 @@ class Event;
 using namespace std;
 
 //class Transition;
+namespace StateMachine {
+    class Machine : public Object {
+    public:
+        Machine();
 
-class Machine : public Object {
-public:
-    Machine();
-    Machine(Model *);
-    Machine(Model *, vector<string> *, vector<vector<string>> *, string);
+        Machine(Model *);
 
-    void addModel(Model *);
-    void initModel(Model *);
+        Machine(Model *, vector<string> *, vector<vector<string>> *, string);
 
-    bool isStateExit(string);
-    void addState(string);
-    void addStates(vector<string> *);
+        void addModel(Model *);
 
-    Transition* findTransition(string);
-    void addTransition(vector<string> *);
-    void addTransitions(vector<vector<string>> *);
+        void initModel(Model *);
 
-    void trigger(Model *, string, string);
+        bool isStateExit(string);
 
-    void addStateCallback(string, string, State::callbackFunc);
-    void addTransitionCallback(string, string, Transition::callbackFunc);
+        void addState(string);
 
-    bool setState(Model *, string);
+        void addStates(vector<string> *);
 
-private:
-    void _addModel(Model *);
-    void _addEvent(Event *);
-    Event* getEvent(string name);
-    State* getState(string name);
+        bool findTransition(string, Event *&, Transition *&);
 
-private:
-    vector<Model *> modelList;
-    vector<Event *> eventList;
-    vector<State *> stateList;
-    string initStateName;
+        void addTransition(vector<string> *);
 
-};
+        void addTransitions(vector<vector<string>> *);
+
+        bool canTrigger(Transition *, string);
+
+        bool canTrigger(string, string, State *&);
+
+        void trigger(Model *, string, string);
+
+        void addStateCallback(string, string, callbackFunc);
+
+        void addTransitionCallback(string, string, callbackFunc);
+
+        bool setState(Model *, EventData *);
+
+        bool setState(Model *, string);
+
+    private:
+        void _addModel(Model *);
+
+        void _addEvent(Event *);
+
+        bool _setState(Model *, State *);
+
+        Event *getEvent(string name);
+
+        State *getState(string name);
+
+        EventData *getParam();
+
+    private:
+        vector<Model *> modelList;
+        vector<Event *> eventList;
+        vector<State *> stateList;
+
+        string initStateName;
+
+        EventData *param;
+    };
+}
 
 #endif //TRANSITION4CPP_MACHINE_H
