@@ -10,25 +10,21 @@ EventData::EventData() {
 }
 
 EventData::
-EventData(Machine *machine, Model *model, Event *event, Transition *transition, State *src, State *dst) {
+EventData(Machine *machine, Model *model, Event *event, Transition *transition, State *state) {
     this->machine = machine;
     this->model = model;
     this->event = event;
     this->transition = transition;
-    this->src = src;
-    this->dst = dst;
+    this->currentState = state;
 }
 
 void EventData::
-setEventData(Machine *machine, Model *model, Event *event,  Transition *transition, State *src, State *dst) {
+setEventData(Machine *machine, Model *model, Event *event,  Transition *transition, State *state) {
     setMachine(machine);
     setModel(model);
     setEvent(event);
     setTransition(transition);
-    setSrcState(src);
-    setDstState(dst);
-
-    clearCallback();
+    setCurrentState(state);
 }
 
 Machine* EventData::
@@ -72,72 +68,20 @@ setTransition(Transition *transition) {
 }
 
 State* EventData::
-getSrcState() {
-    return this->src;
+getCurrentState() {
+    return this->currentState;
 }
 
 void EventData::
-setSrcState(State *src) {
-    this->src = src;
-}
-
-State* EventData::
-getDstState() {
-    return this->dst;
-}
-
-void EventData::
-setDstState(State *dst) {
-    this->dst = dst;
-}
-
-string EventData::
-getErrorString() {
-    return this->error;
+setCurrentState(State *state) {
+    this->currentState = state;
 }
 
 bool EventData::
-getResult() {
-    return this->result;
-}
+trigger() {
+    if (NULL == transition) {
+        return false;
+    }
 
-void EventData::
-clearCallback() {
-    conditionList = NULL;
-    beforeFuncList = NULL;
-    afterFuncList = NULL;
-    prepareFuncList = NULL;
-
-    enterFunList = NULL;
-    exitFunList = NULL;
-}
-
-void EventData::
-setPrepare(vector<callbackFunc> *prepareFuncList) {
-    this->prepareFuncList = prepareFuncList;
-}
-
-void EventData::
-setCondition(vector<Condition *> *conditionList) {
-    this->conditionList = conditionList;
-}
-
-void EventData::
-setBefore(vector<callbackFunc> *beforeFuncList) {
-    this->beforeFuncList = beforeFuncList;
-}
-
-void EventData::
-setAfter(vector<callbackFunc> *afterFuncList) {
-    this->afterFuncList = afterFuncList;
-}
-
-void EventData::
-setEnter(vector<callbackFunc> *enterFunList) {
-    this->enterFunList = enterFunList;
-}
-
-void EventData::
-setExit(vector<callbackFunc> *exitFunList) {
-    this->afterFuncList = exitFunList;
+    return transition->execute(this);
 }

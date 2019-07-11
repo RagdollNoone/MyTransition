@@ -3,6 +3,7 @@
 //
 
 #include "Transition.h"
+
 using namespace StateMachine;
 using std::string;
 
@@ -11,14 +12,6 @@ Transition(const string name, State *source,  State *dest) {
     this->name = name;
     this->src = source;
     this->dst = dest;
-}
-
-void Transition::
-fillCallback(EventData *eventData){
-    eventData->setPrepare(&(this->prepareFuncList));
-    eventData->setCondition(&(this->conditionList));
-    eventData->setBefore(&(this->beforeFuncList));
-    eventData->setAfter(&(this->afterFuncList));
 }
 
 void Transition::
@@ -61,13 +54,68 @@ getDstState() {
     return dst;
 }
 
-void Transition::
-changeTransititon(State *srcState, State *destState) {
-    if (NULL != srcState) {
+bool Transition::
+changeTransition(State *srcState, State *destState) {
+    State *oldSrc = src;
+    State *oldDst = dst;
+
+    bool ret = true;
+
+    if (NULL == srcState) {
+        ret = false;
+    } else {
         src = srcState;
     }
 
-    if (NULL != destState) {
+    if (NULL == destState) {
+        ret = false;
+    } else {
         dst = destState;
     }
+
+    if (!ret) {
+        src = oldSrc;
+        dst = oldDst;
+    }
+
+    return ret;
 }
+
+bool Transition::
+execute(EventData *eventData) {
+    vector<callbackFunc>::iterator prepare = prepareFuncList.begin();
+    for (; prepare != prepareFuncList.end(); ++prepare) {
+        callback((*prepare), eventData);
+    }
+
+    bool conditionRet = true;
+    vector<Condition *>::iterator condition = conditionList.begin();
+    for (; condition != conditionList.end(); ++condition) {
+        if (!(*condition)->check()) {
+            conditionRet = false;
+            break;
+        }
+    }
+
+    if (!conditionRet) {
+        return conditionRet;
+    }
+
+    vector<callbackFunc>::iterator before = beforeFuncList.begin();
+    for (; before != beforeFuncList.end(); ++before) {
+        callback((*before), eventData);
+    }
+
+    src->exit(eventData);
+    eventData->setCurrentState(dst);
+    dst->enter(eventData);
+
+    vector<callbackFunc>::iterator after = afterFuncList.begin();
+    for (; after != afterFuncList.end(); ++after) {
+        callback((*after), eventData);
+    }
+
+    return true;
+}
+
+

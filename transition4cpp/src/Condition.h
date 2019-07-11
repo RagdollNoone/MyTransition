@@ -11,15 +11,7 @@ namespace StateMachine {
 
     class Condition : public Object {
     public:
-        typedef bool (*checkFunc)(EventData *);
-
-    public:
-        Condition(checkFunc);
-
-        bool check();
-
-    private:
-        checkFunc callback;
+        virtual bool check();
     };
 }
 #endif //TRANSITION4CPP_CONDITION_H

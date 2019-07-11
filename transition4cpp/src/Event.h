@@ -14,11 +14,10 @@ using std::string;
 using std::vector;
 
 namespace StateMachine {
-    class Machine;
 
     class Event : public Object {
     public:
-        Event(string, Machine *);
+        Event(string);
 
         bool findTransition(string, Transition *&);
 
@@ -27,7 +26,6 @@ namespace StateMachine {
         string getName();
 
     private:
-        Machine *machine;
         string name;
         vector<Transition *> transitionList;
     };

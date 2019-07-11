@@ -5,20 +5,25 @@
 #define TRANSITION4CPP_STATE_H
 
 #include <iostream>
+#include <vector>
+
 #include "Object.h"
-#include "EventData.h"
+#include "Utility.h"
 
 using std::string;
+using std::vector;
 
 namespace StateMachine {
+    class EventData;
+
     class State : public Object {
     public:
         State(string);
 
-        void fillCallback(int, EventData *);
+        void enter(EventData *);
+        void exit(EventData *);
 
         void addEnterCallback(callbackFunc);
-
         void addExitCallback(callbackFunc);
 
         string getName();

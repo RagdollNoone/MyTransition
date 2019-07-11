@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "Object.h"
+#include "Transition.h"
 #include "Callback.h"
 
 using std::vector;
@@ -19,15 +20,13 @@ namespace StateMachine {
     class Machine;
     class Model;
     class Event;
-    class Transition;
     class State;
-    class Condition;
 
     class EventData : public Object {
     public:
         EventData();
 
-        EventData(Machine *, Model *, Event *, Transition *, State *, State *);
+        EventData(Machine *, Model *, Event *, Transition *, State *);
 
         Machine *getMachine();
 
@@ -45,29 +44,13 @@ namespace StateMachine {
 
         void setTransition(Transition *);
 
-        State *getSrcState();
+        State *getCurrentState();
 
-        void setSrcState(State *);
+        void setCurrentState(State *);
 
-        State *getDstState();
+        void setEventData(Machine *, Model *, Event *, Transition *, State *);
 
-        void setDstState(State *);
-
-        void setEventData(Machine *, Model *, Event *, Transition *, State *, State *);
-
-        void clearCallback();
-
-        void setPrepare(vector<callbackFunc> *);
-
-        void setCondition(vector<Condition *> *);
-
-        void setBefore(vector<callbackFunc> *);
-
-        void setAfter(vector<callbackFunc> *);
-
-        void setEnter(vector<callbackFunc> *);
-
-        void setExit(vector<callbackFunc> *);
+        bool trigger();
 
         string getErrorString();
 
@@ -78,16 +61,7 @@ namespace StateMachine {
         Model *model;
         Event *event;
         Transition *transition;
-        State *src;
-        State *dst;
-
-        vector<callbackFunc> *afterFuncList;
-        vector<Condition *> *conditionList;
-        vector<callbackFunc> *beforeFuncList;
-        vector<callbackFunc> *prepareFuncList;
-
-        vector<callbackFunc> *enterFunList;
-        vector<callbackFunc> *exitFunList;
+        State *currentState;
 
         string error;
         bool result;

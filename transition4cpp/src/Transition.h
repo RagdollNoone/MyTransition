@@ -7,25 +7,21 @@
 #include <iostream>
 #include <vector>
 
-#include "Object.h"
-#include "EventData.h"
-#include "Callback.h"
 #include "State.h"
+#include "Condition.h"
+#include "Callback.h"
+#include "Utility.h"
 
 using std::string;
 using std::vector;
-using StateMachine::callbackFunc;
 
 namespace StateMachine {
-    class Condition;
-    class EventData;
+    class State;
 
     class Transition : public Object {
 
     public:
         Transition(const string, State *, State *);
-
-        void fillCallback(EventData *);
 
         void addBeforeCallback(callbackFunc);
 
@@ -43,8 +39,9 @@ namespace StateMachine {
 
         State *getDstState();
 
+        bool execute(EventData *);
 
-        void changeTransititon(State *, State *);
+        bool changeTransition(State *, State *);
 
     private:
         string name;

@@ -8,9 +8,8 @@ using std::string;
 using std::vector;
 
 Event::
-Event(string name, Machine *machine) {
+Event(string name) {
     this->name = name;
-    this->machine = machine;
 }
 
 bool Event::

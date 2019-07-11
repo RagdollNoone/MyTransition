@@ -106,7 +106,7 @@ addTransition(vector<string> *transition) {
 
     Event *event = getEvent(src->getName());
     if (NULL == event) {
-        event = new Event(src->getName(), this);
+        event = new Event(src->getName());
         this->_addEvent(event);
     }
 
@@ -114,7 +114,7 @@ addTransition(vector<string> *transition) {
     Transition *refTransition = NULL;
 
     if (findTransition((*transition)[1], refEvent, refTransition)) {
-        refTransition->changeTransititon(src, dest);
+        refTransition->changeTransition(src, dest);
     } else {
         Transition *newTransition = new Transition((*transition)[1], src, dest);
         event->addTransition(newTransition);
@@ -189,7 +189,6 @@ getParam() {
 void Machine::
 trigger(Model *model, string srcName, string triggerName) {
     State *src = model->getCurrentState();
-    State *dst = NULL;
     Event *refEvent = NULL;
     Transition *refTransition = NULL;
 
@@ -197,14 +196,8 @@ trigger(Model *model, string srcName, string triggerName) {
         if (canTrigger(refTransition, srcName)) {
             // fill EventData
             EventData *eventData = getParam();
-            eventData->setEventData(this, model, refEvent, refTransition, src, dst);
-            refTransition->fillCallback(eventData);
-            src->fillCallback(0, eventData);
-            dst->fillCallback(1, eventData);
-
-            // do Trigger
-            setState(model, eventData);
-
+            eventData->setEventData(this, model, refEvent, refTransition, src);
+            eventData->trigger();
         } else {
             // error
         }
@@ -213,9 +206,7 @@ trigger(Model *model, string srcName, string triggerName) {
 
 bool Machine::
 setState(Model *model, EventData *eventData) {
-    _setState(model, eventData->getDstState());
-
-//    vector<State::callbackFunc >::iterator enter = eventData->get
+    _setState(model, eventData->getCurrentState());
 
     return true;
 }
