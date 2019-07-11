@@ -16,7 +16,7 @@ int main() {
 
     vector<vector<string>> transitions;
     transitions.push_back({"solid", "melt", "liquid"});
-    transitions.push_back({"liquid", "evaporate", "gas"});
+    transitions.push_back({"liquid", "vaporization", "gas"});
     transitions.push_back({"solid", "sublimate", "gas"});
     transitions.push_back({"gas", "ionize", "plasma"});
 
@@ -29,13 +29,11 @@ int main() {
     machine->addTransitionCallback("melt", "prepare", &(Matter::prepare));
     machine->addTransitionCallback("melt", "after", &(Matter::after));
 
-    cout << "just for break" << endl;
-
     lump->trigger("melt");
+    cout << "current state is " << lump->getCurrentStateName() << endl;
 
-    cout << "--------------------------" << endl;
-
-    lump->trigger("sublimate");
+    lump->trigger("vaporization");
+    cout << "current state is " << lump->getCurrentStateName() << endl;
 
     return 0;
 }

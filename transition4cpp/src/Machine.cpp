@@ -6,6 +6,8 @@
 using namespace StateMachine;
 using std::vector;
 using std::string;
+using std::cout;
+using std::endl;
 
 Machine::
 Machine() {
@@ -91,6 +93,8 @@ findTransition(string transitionName, Event *&event, Transition *&transition) {
         }
     }
 
+    cout << "Machine::findTransition() can not find transition, transition name is " << transitionName << endl;
+
     return false;
 }
 
@@ -163,7 +167,8 @@ canTrigger(string srcName, string triggerName, State *&dst) {
         if (transition->getSrcName() == srcName) {
             return true;
         } else {
-
+            cout << "Machine::canTrigger(3) can not find transition name is " <<  transition->getTriggerName()
+                 << "source state name is " << srcName << endl;
         }
     }
 
@@ -175,7 +180,8 @@ canTrigger(Transition *transition, string srcName) {
     if (transition->getSrcName() == srcName) {
         return true;
     } else {
-
+        cout << "Machine::canTrigger(2) can not find transition name is " <<  transition->getTriggerName()
+        << ", source state name is " << srcName << endl;
     }
 
     return false;
@@ -196,6 +202,7 @@ trigger(Model *model, string srcName, string triggerName) {
     Event *refEvent = NULL;
     Transition *refTransition = NULL;
 
+    bool ret = false;
     if (findTransition(triggerName, refEvent, refTransition)) {
         if (canTrigger(refTransition, srcName)) {
             // fill EventData
@@ -203,9 +210,13 @@ trigger(Model *model, string srcName, string triggerName) {
             eventData->setEventData(this, model, refEvent, refTransition, src);
 
             process(eventData);
-        } else {
-            // error
+
+            ret = true;
         }
+    }
+
+    if (!ret) {
+        cout << "Machine::trigger() trigger fail" << endl;
     }
 }
 
@@ -229,8 +240,6 @@ process(EventData *eventData) {
         transition->afterTransition(eventData);
     }
 }
-
-
 
 
 bool Machine::

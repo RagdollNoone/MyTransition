@@ -9,26 +9,26 @@ using std::endl;
 
 void Matter::
 enter(EventData *eventData) {
-    cout << "enter" << endl;
+    cout << "Matter::enter" << endl;
 }
 
 void Matter::
 exit(EventData *eventData) {
-    cout << "exit" << endl;
+    cout << "Matter::exit" << endl;
 
 }
 
 void Matter::
 before(EventData *eventData) {
-    cout << "before" << endl;
+    cout << "Matter::before" << endl;
 }
 
 void Matter::
 prepare(EventData *eventData) {
-    cout << "prepare" << endl;
+    cout << "Matter::prepare" << endl;
 }
 
 void Matter::
 after(EventData *eventData) {
-    cout << "after" << endl;
+    cout << "Matter::after" << endl;
 }

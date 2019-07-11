@@ -5,6 +5,8 @@
 #include "Model.h"
 using namespace StateMachine;
 using std::string;
+using std::cout;
+using std::endl;
 
 Model::
 Model(string modelName) {
@@ -35,7 +37,8 @@ void Model::
 trigger(string triggerName) {
     if (NULL != machine) {
         string stateName = getCurrentStateName();
-
         this->machine->trigger(this, stateName, triggerName);
+    } else {
+        cout << "Model::trigger() machine point is NULL" << endl;
     }
 }

@@ -56,6 +56,8 @@ namespace StateMachine {
 
         bool setState(Model *, string);
 
+        string getCurrentStateName();
+
     private:
         void _addModel(Model *);
 
