@@ -2,7 +2,12 @@
 #include "Matter.h"
 #include "Machine.h"
 
-using namespace StateMachine;
+using StateMachine::Machine;
+
+using std::string;
+using std::vector;
+using std::cout;
+using std::endl;
 
 int main() {
     Model *lump = new Matter("lump");

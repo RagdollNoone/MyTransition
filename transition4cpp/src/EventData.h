@@ -1,28 +1,28 @@
 //
 // Created by dendy on 19-7-3.
 //
-#pragma once
-
 #ifndef TRANSITION4CPP_EVENTDATA_H
 #define TRANSITION4CPP_EVENTDATA_H
+
+#include <iostream>
+#include <vector>
 
 #include "Object.h"
 #include "Callback.h"
 
-#include <string>
-#include <vector>
+using std::vector;
+using std::string;
 
-class Machine;
-class Model;
-class Event;
-class Transition;
-class State;
-
-class Condition;
-
-using namespace std;
+using StateMachine::callbackFunc;
 
 namespace StateMachine {
+    class Machine;
+    class Model;
+    class Event;
+    class Transition;
+    class State;
+    class Condition;
+
     class EventData : public Object {
     public:
         EventData();

@@ -6,19 +6,20 @@
 
 #include "Object.h"
 
-class EventData;
+namespace StateMachine {
+    class EventData;
 
-class Condition : public Object {
-public:
-    typedef bool (*checkFunc)(EventData *);
+    class Condition : public Object {
+    public:
+        typedef bool (*checkFunc)(EventData *);
 
-public:
-    Condition(checkFunc);
-    bool check();
+    public:
+        Condition(checkFunc);
 
-private:
-    checkFunc callback;
+        bool check();
 
-
-};
+    private:
+        checkFunc callback;
+    };
+}
 #endif //TRANSITION4CPP_CONDITION_H

@@ -3,6 +3,7 @@
 //
 
 #include "EventData.h"
+using namespace StateMachine;
 
 EventData::EventData() {
 
@@ -112,7 +113,7 @@ clearCallback() {
 }
 
 void EventData::
-setPrepare(vector<Transition::callbackFunc> *prepareFuncList) {
+setPrepare(vector<callbackFunc> *prepareFuncList) {
     this->prepareFuncList = prepareFuncList;
 }
 
@@ -122,21 +123,21 @@ setCondition(vector<Condition *> *conditionList) {
 }
 
 void EventData::
-setBefore(vector<Transition::callbackFunc> *beforeFuncList) {
+setBefore(vector<callbackFunc> *beforeFuncList) {
     this->beforeFuncList = beforeFuncList;
 }
 
 void EventData::
-setAfter(vector<Transition::callbackFunc> *afterFuncList) {
+setAfter(vector<callbackFunc> *afterFuncList) {
     this->afterFuncList = afterFuncList;
 }
 
 void EventData::
-setEnter(vector<State::callbackFunc> *enterFunList) {
+setEnter(vector<callbackFunc> *enterFunList) {
     this->enterFunList = enterFunList;
 }
 
 void EventData::
-setExit(vector<State::callbackFunc> *exitFunList) {
+setExit(vector<callbackFunc> *exitFunList) {
     this->afterFuncList = exitFunList;
 }

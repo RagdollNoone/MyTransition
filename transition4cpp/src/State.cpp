@@ -3,6 +3,8 @@
 //
 
 #include "State.h"
+using namespace StateMachine;
+using std::string;
 
 State::
 State(string name) {
@@ -18,6 +20,11 @@ fillCallback(int type, EventData *eventData){
     } else {
 
     }
+}
+
+void State::
+addEnterCallback(callbackFunc exit) {
+    this->enterFunList.push_back(exit);
 }
 
 void State::

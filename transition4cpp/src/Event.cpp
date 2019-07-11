@@ -3,6 +3,9 @@
 //
 
 #include "Event.h"
+using namespace StateMachine;
+using std::string;
+using std::vector;
 
 Event::
 Event(string name, Machine *machine) {

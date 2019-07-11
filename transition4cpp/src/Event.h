@@ -4,21 +4,18 @@
 #ifndef TRANSITION4CPP_EVENT_H
 #define TRANSITION4CPP_EVENT_H
 
-#include "Object.h"
-#include "Transition.h"
-#include "Model.h"
-#include "State.h"
-
-#include <string>
+#include <iostream>
 #include <vector>
 
-class Machine;
-class Model;
-class Transition;
+#include "Object.h"
+#include "Transition.h"
 
-using namespace std;
+using std::string;
+using std::vector;
 
 namespace StateMachine {
+    class Machine;
+
     class Event : public Object {
     public:
         Event(string, Machine *);

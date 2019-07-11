@@ -3,6 +3,8 @@
 //
 
 #include "Model.h"
+using namespace StateMachine;
+using std::string;
 
 Model::
 Model(string modelName) {

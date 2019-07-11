@@ -4,20 +4,14 @@
 #ifndef TRANSITION4CPP_STATE_H
 #define TRANSITION4CPP_STATE_H
 
+#include <iostream>
 #include "Object.h"
-#include <string>
-#include <vector>
-
 #include "EventData.h"
-#include "Callback.h"
 
-class EventData;
-
-using namespace std;
+using std::string;
 
 namespace StateMachine {
     class State : public Object {
-
     public:
         State(string);
 

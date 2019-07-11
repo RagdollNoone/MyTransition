@@ -11,14 +11,10 @@
 #include "Object.h"
 #include "State.h"
 #include "Transition.h"
-#include "EventData.h"
 #include "Event.h"
-
-class Model;
-class State;
-class Event;
-
-using namespace std;
+#include "Model.h"
+#include "Callback.h"
+#include "EventData.h"
 
 //class Transition;
 namespace StateMachine {

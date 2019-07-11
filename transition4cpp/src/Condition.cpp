@@ -4,6 +4,8 @@
 
 #include "Condition.h"
 
+using namespace StateMachine;
+
 Condition::
 Condition(checkFunc callback) {
     this->callback = callback;

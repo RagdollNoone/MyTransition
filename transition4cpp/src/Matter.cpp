@@ -3,6 +3,9 @@
 //
 
 #include "Matter.h"
+using namespace StateMachine;
+using std::cout;
+using std::endl;
 
 void Matter::
 enter(EventData *eventData) {

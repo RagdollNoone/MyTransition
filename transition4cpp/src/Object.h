@@ -4,7 +4,9 @@
 
 #ifndef TRANSITION4CPP_OBJECT_H
 #define TRANSITION4CPP_OBJECT_H
-class Object{
+namespace StateMachine {
+    class Object {
 
-};
+    };
+}
 #endif //TRANSITION4CPP_OBJECT_H

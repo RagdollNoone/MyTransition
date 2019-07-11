@@ -4,21 +4,22 @@
 #ifndef TRANSITION4CPP_TRANSITION_H
 #define TRANSITION4CPP_TRANSITION_H
 
-#include <string>
+#include <iostream>
 #include <vector>
 
 #include "Object.h"
-#include "State.h"
-#include "Condition.h"
 #include "EventData.h"
+#include "Callback.h"
+#include "State.h"
 
-class State;
-class Condition;
-class EventData;
-
-using namespace std;
+using std::string;
+using std::vector;
+using StateMachine::callbackFunc;
 
 namespace StateMachine {
+    class Condition;
+    class EventData;
+
     class Transition : public Object {
 
     public:

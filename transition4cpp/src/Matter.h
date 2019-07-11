@@ -5,12 +5,11 @@
 #ifndef TRANSITION4CPP_MATTER_H
 #define TRANSITION4CPP_MATTER_H
 
-#include "Model.h"
 #include <iostream>
+#include "Model.h"
 
-using namespace std;
-
-class EventData;
+using StateMachine::Model;
+using StateMachine::EventData;
 
 class Matter : public Model {
 public:

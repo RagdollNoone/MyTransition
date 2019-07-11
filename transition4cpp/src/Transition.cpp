@@ -3,6 +3,8 @@
 //
 
 #include "Transition.h"
+using namespace StateMachine;
+using std::string;
 
 Transition::
 Transition(const string name, State *source,  State *dest) {
@@ -11,11 +13,17 @@ Transition(const string name, State *source,  State *dest) {
     this->dst = dest;
 }
 
-void Transition::fillCallback(EventData *eventData){
-    eventData->setPrepare(&(this->prepareFuncList))
-    eventData->setCondition(&(this->conditionList))
-    eventData->setBefore(&(this->beforeFuncList))
-    eventData->setAfter(&(this->afterFuncList))
+void Transition::
+fillCallback(EventData *eventData){
+    eventData->setPrepare(&(this->prepareFuncList));
+    eventData->setCondition(&(this->conditionList));
+    eventData->setBefore(&(this->beforeFuncList));
+    eventData->setAfter(&(this->afterFuncList));
+}
+
+void Transition::
+addBeforeCallback(const callbackFunc callback) {
+    beforeFuncList.push_back(callback);
 }
 
 void Transition::

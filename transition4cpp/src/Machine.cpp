@@ -3,6 +3,9 @@
 //
 
 #include "Machine.h"
+using namespace StateMachine;
+using std::vector;
+using std::string;
 
 Machine::
 Machine() {
@@ -233,7 +236,7 @@ _setState(Model *model, State *dst) {
 }
 
 void Machine::
-addStateCallback(string stateName, string callbackName, State::callbackFunc callback) {
+addStateCallback(string stateName, string callbackName, callbackFunc callback) {
     if (callbackName == "enter") {
         getState(stateName)->addEnterCallback(callback);
     } else if (callbackName == "exit") {
@@ -244,7 +247,7 @@ addStateCallback(string stateName, string callbackName, State::callbackFunc call
 }
 
 void Machine::
-addTransitionCallback(string transitionName, string callbackName, Transition::callbackFunc callback) {
+addTransitionCallback(string transitionName, string callbackName, callbackFunc callback) {
     Event *event = NULL;
     Transition *transition = NULL;
 
