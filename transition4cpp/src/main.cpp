@@ -22,7 +22,7 @@ int main() {
 
     Machine *machine = new Machine(lump, &states, &transitions, "solid");
 
-    machine->addStateCallback("solid", "enter", &(Matter::enter));
+    machine->addStateCallback("liquid", "enter", &(Matter::enter));
     machine->addStateCallback("solid", "exit", &(Matter::exit));
 
     machine->addTransitionCallback("melt", "before", &(Matter::before));

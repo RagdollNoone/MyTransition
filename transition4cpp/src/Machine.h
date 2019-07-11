@@ -69,6 +69,8 @@ namespace StateMachine {
 
         EventData *getParam();
 
+        void process(EventData *);
+
     private:
         vector<Model *> modelList;
         vector<Event *> eventList;

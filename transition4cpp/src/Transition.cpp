@@ -81,41 +81,54 @@ changeTransition(State *srcState, State *destState) {
     return ret;
 }
 
-bool Transition::
-execute(EventData *eventData) {
+void Transition::
+prepare(StateMachine::EventData *eventData) {
     vector<callbackFunc>::iterator prepare = prepareFuncList.begin();
     for (; prepare != prepareFuncList.end(); ++prepare) {
         callback((*prepare), eventData);
     }
+}
 
-    bool conditionRet = true;
+bool Transition::
+checkCondition(StateMachine::EventData *eventData) {
+    bool ret = true;
+
     vector<Condition *>::iterator condition = conditionList.begin();
     for (; condition != conditionList.end(); ++condition) {
         if (!(*condition)->check()) {
-            conditionRet = false;
+            ret = false;
             break;
         }
     }
 
-    if (!conditionRet) {
-        return conditionRet;
-    }
+    return ret;
+}
 
+
+void Transition::
+beforeTransition(StateMachine::EventData *eventData) {
     vector<callbackFunc>::iterator before = beforeFuncList.begin();
     for (; before != beforeFuncList.end(); ++before) {
         callback((*before), eventData);
     }
+}
 
-    src->exit(eventData);
-    eventData->setCurrentState(dst);
-    dst->enter(eventData);
-
+void Transition::
+afterTransition(StateMachine::EventData *eventData) {
     vector<callbackFunc>::iterator after = afterFuncList.begin();
     for (; after != afterFuncList.end(); ++after) {
         callback((*after), eventData);
     }
-
-    return true;
 }
+
+
+
+
+//src->exit(eventData);
+//eventData->setCurrentState(dst);
+//dst->enter(eventData);
+
+
+
 
 

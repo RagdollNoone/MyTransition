@@ -8,7 +8,6 @@
 #include <vector>
 
 #include "Object.h"
-#include "Transition.h"
 #include "Callback.h"
 
 using std::vector;
@@ -20,6 +19,7 @@ namespace StateMachine {
     class Machine;
     class Model;
     class Event;
+    class Transition;
     class State;
 
     class EventData : public Object {
@@ -49,8 +49,6 @@ namespace StateMachine {
         void setCurrentState(State *);
 
         void setEventData(Machine *, Model *, Event *, Transition *, State *);
-
-        bool trigger();
 
         string getErrorString();
 

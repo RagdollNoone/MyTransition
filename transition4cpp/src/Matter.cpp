@@ -12,7 +12,6 @@ enter(EventData *eventData) {
     cout << "enter" << endl;
 }
 
-
 void Matter::
 exit(EventData *eventData) {
     cout << "exit" << endl;

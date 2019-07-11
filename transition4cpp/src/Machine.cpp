@@ -163,9 +163,11 @@ canTrigger(string srcName, string triggerName, State *&dst) {
         if (transition->getSrcName() == srcName) {
             return true;
         } else {
-            return false;
+
         }
     }
+
+    return false;
 }
 
 bool Machine::
@@ -173,8 +175,10 @@ canTrigger(Transition *transition, string srcName) {
     if (transition->getSrcName() == srcName) {
         return true;
     } else {
-        return false;
+
     }
+
+    return false;
 }
 
 EventData* Machine::
@@ -197,12 +201,37 @@ trigger(Model *model, string srcName, string triggerName) {
             // fill EventData
             EventData *eventData = getParam();
             eventData->setEventData(this, model, refEvent, refTransition, src);
-            eventData->trigger();
+
+            process(eventData);
         } else {
             // error
         }
     }
 }
+
+
+void Machine::
+process(EventData *eventData) {
+    Transition *transition = eventData->getTransition();
+    Model *model = eventData->getModel();
+
+    transition->prepare(eventData);
+    if (transition->checkCondition(eventData)) {
+        transition->beforeTransition(eventData);
+
+        State *src = transition->getSrcState();
+        State *dst = transition->getDstState();
+        src->exit(eventData);
+        eventData->setCurrentState(dst);
+        _setState(model, dst);
+        dst->enter(eventData);
+
+        transition->afterTransition(eventData);
+    }
+}
+
+
+
 
 bool Machine::
 setState(Model *model, EventData *eventData) {

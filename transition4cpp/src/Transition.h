@@ -39,7 +39,10 @@ namespace StateMachine {
 
         State *getDstState();
 
-        bool execute(EventData *);
+        void prepare(EventData *);
+        bool checkCondition(EventData *);
+        void beforeTransition(EventData *);
+        void afterTransition(EventData *);
 
         bool changeTransition(State *, State *);
 

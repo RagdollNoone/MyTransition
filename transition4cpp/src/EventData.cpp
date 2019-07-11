@@ -77,11 +77,3 @@ setCurrentState(State *state) {
     this->currentState = state;
 }
 
-bool EventData::
-trigger() {
-    if (NULL == transition) {
-        return false;
-    }
-
-    return transition->execute(this);
-}
